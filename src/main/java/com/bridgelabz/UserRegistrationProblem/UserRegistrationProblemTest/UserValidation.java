@@ -29,7 +29,7 @@ public class UserValidation {
 	}
 
 	public boolean ValidatePassword(String password) {
-		return password.matches("(?=.*[A-Z])(?=.*[0-9])(.{6,})");
+		return password.matches("((^(?=.*[A-Z]))(?=.*[0-9])(?=.*[a-z])(?=.*[@*&^%#-*+!]{1}).{8,}$)");
 	}
 
 

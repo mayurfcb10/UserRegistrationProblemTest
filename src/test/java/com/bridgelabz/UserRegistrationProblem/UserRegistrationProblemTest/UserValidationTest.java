@@ -105,24 +105,24 @@ public class UserValidationTest
 	}
 	
 	@Test
-	public void given_Strong_Password_when_given_CapitalAlphabet_return_true()
+	public void given_Strong_Password_when_given_correct_return_true()
 	{
-		boolean result = userValidation.ValidatePassword("sfasHd8&");
-		Assert.assertTrue( result );
+		boolean result = userValidation.ValidatePassword("zcsfkasHds98&");
+		Assert.assertTrue( result);
 	}
 
 	@Test
-	public void given_Strong_Password_when_given_nonCapitalLetter_return_false()
+	public void given_Strong_Password_when_given_incorrect_return_false()
 	{
 		boolean result = userValidation.ValidatePassword("zcsfkasds98&");
-		Assert.assertEquals( result, false );
+		Assert.assertFalse( result);
 	}
 
 	@Test
 	public void given_Strong_Password_when_given_more_than_one_Specialcharacter_return_false()
 	{
 		boolean result = userValidation.ValidatePassword("zcsfkasds9&5%8&");
-		Assert.assertFalse( result );
+		Assert.assertEquals( result, false);
 	}
 	
 }
