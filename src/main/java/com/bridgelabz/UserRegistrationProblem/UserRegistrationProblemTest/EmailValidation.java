@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class EmailValidation {
 	public void ValidateEmail() {
 
-		String matcher="^[a-zA-Z]+([._+-]{0,1}[a-zA-Z0-9]+)*@[a-zA-Z0-9]+.[a-zA-Z]{2,4}+(?:\\.[a-z]{2,}){0,1}$";
+		String matcher="^[a-zA-Z0-9]+([-._+]?{0,1}[a-zA-Z0-9])*@[a-zA-Z0-9]+.[a-zA-Z]{2,4}+(?:\\\\.[a-z]{2,}){0,1}$";
 		ArrayList<String> validate = new ArrayList<>();
 		// valid email
 		validate.add("abc@yahoo.com");
@@ -42,5 +42,9 @@ public class EmailValidation {
 		EmailValidation register = new EmailValidation(); 
 		register.ValidateEmail();
 
+	}
+
+	public boolean EmailValidate(String emailValidate, boolean expectedResult) {
+		 return emailValidate.matches("^[a-zA-Z]+([._+-]{0,1}[a-zA-Z0-9]+)*@[a-zA-Z0-9]+.[a-zA-Z]{2,4}+(?:\\.[a-z]{2,}){0,1}$");
 	}
 }
