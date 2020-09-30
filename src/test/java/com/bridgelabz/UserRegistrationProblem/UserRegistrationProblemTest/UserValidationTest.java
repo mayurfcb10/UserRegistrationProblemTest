@@ -98,9 +98,15 @@ public class UserValidationTest
 	}
 
 	@Test
-	public void given_PhoneNumber_with_Invalid_countryCode_return_false()
+	public void given_PhoneNumber_with_No_countryCode_return_false()
 	{
 		boolean result = userValidation.ValidatePhoneNumber("7596859453");
+		Assert.assertFalse( result );
+	}
+	@Test
+	public void given_PhoneNumber_with_Invalid_countryCode_return_false()
+	{
+		boolean result = userValidation.ValidatePhoneNumber("091 7596859453");
 		Assert.assertFalse( result );
 	}
 	
@@ -124,5 +130,21 @@ public class UserValidationTest
 		boolean result = userValidation.ValidatePassword("zcsfkasds9&5%8&");
 		Assert.assertEquals( result, false);
 	}
+	
+	@Test
+	public void given_Strong_Password_when_given_No_UpperCharacter_return_false()
+	{
+		boolean result = userValidation.ValidatePassword("zcsfkasds9&5");
+		Assert.assertEquals( result, false);
+	}
+	
+	@Test
+	public void given_Strong_Password_when_given_No_Digit_return_false()
+	{
+		boolean result = userValidation.ValidatePassword("zCsfkasds&");
+		Assert.assertEquals( result, false);
+	}
+	
+	
 	
 }
