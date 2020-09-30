@@ -89,6 +89,20 @@ public class UserValidationTest
 		boolean result = userValidation.ValidateEmail("abc@%*.com.com");
 		Assert.assertEquals( false, result );
 	}
+	
+	@Test
+	public void given_PhoneNumber_with_valid_countryCode_return_true()
+	{
+		boolean result = userValidation.ValidatePhoneNumber("91 7972245761");
+		Assert.assertTrue( result );
+	}
+
+	@Test
+	public void given_PhoneNumber_with_Invalid_countryCode_return_false()
+	{
+		boolean result = userValidation.ValidatePhoneNumber("7596859453");
+		Assert.assertFalse( result );
+	}
 
 
 	

@@ -23,5 +23,9 @@ public class UserValidation {
 	public boolean ValidateEmail(String email) {
 		return email.matches("(^[a-zA-Z]+([._+-]{0,1}[a-zA-Z0-9]+)*@[a-zA-Z0-9]+.[a-zA-Z]{2,4}+(?:\\.[a-z]{2,}){0,1}$)");
 	}
+	
+	public boolean ValidatePhoneNumber(String phoneNumber) {
+		return phoneNumber.matches("(([0-9]{2})?)[ ][0-9]{10}");
+	}
 
 }
