@@ -19,5 +19,9 @@ public class UserValidation {
 	public boolean ValidateLastName(String lastName) {
 		return lastName.matches("([A-Z][a-z]{2,})");
 	}
+	
+	public boolean ValidateEmail(String email) {
+		return email.matches("(^[a-zA-Z]+([._+-]{0,1}[a-zA-Z0-9]+)*@[a-zA-Z0-9]+.[a-zA-Z]{2,4}+(?:\\.[a-z]{2,}){0,1}$)");
+	}
 
 }

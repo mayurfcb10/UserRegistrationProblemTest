@@ -68,6 +68,28 @@ public class UserValidationTest
 		boolean result = userValidation.ValidateLastName("Mar6sh");
 		Assert.assertEquals( result, false );
 	}
+	
+	@Test
+	public void given_Email_when_given_CountryDomain_return_true()
+	{
+		boolean result = userValidation.ValidateEmail("abc@abc.com.au");
+		Assert.assertTrue( result );
+	}
+
+	@Test
+	public void given_Email_when_emailStartswithDot_return_false()
+	{
+		boolean result = userValidation.ValidateEmail(".abc@gmail.com");
+		Assert.assertFalse( result );
+	}
+
+	@Test
+	public void given_Email_containsOptional_Special_Character_return_true()
+	{
+		boolean result = userValidation.ValidateEmail("abc@%*.com.com");
+		Assert.assertEquals( false, result );
+	}
+
 
 	
 }
