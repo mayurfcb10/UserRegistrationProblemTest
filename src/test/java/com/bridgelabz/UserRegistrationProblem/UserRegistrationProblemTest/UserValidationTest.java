@@ -103,7 +103,26 @@ public class UserValidationTest
 		boolean result = userValidation.ValidatePhoneNumber("7596859453");
 		Assert.assertFalse( result );
 	}
+	
+	@Test
+	public void given_Strong_Password_when_given_correct_return_true()
+	{
+		boolean result = userValidation.ValidatePassword("zcsfkasHds98&");
+		Assert.assertTrue( result );
+	}
 
+	@Test
+	public void given_Strong_Password_when_given_incorrect_return_true()
+	{
+		boolean result = userValidation.ValidatePassword("zcsfkasds98&");
+		Assert.assertEquals( result, true );
+	}
 
+	@Test
+	public void given_Strong_Password_when_given_more_than_one_Specialcharacter_return_true()
+	{
+		boolean result = userValidation.ValidatePassword("zcsfkasds9&5%8&");
+		Assert.assertTrue( true );
+	}
 	
 }
