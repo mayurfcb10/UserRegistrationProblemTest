@@ -47,6 +47,27 @@ public class UserValidationTest
 		boolean result = userValidation.ValidateFirstName("Mar6sh");
 		Assert.assertFalse( result );
 	}
+	
+	@Test
+	public void given_LastName_CapitalLetter_return_true()
+	{
+		boolean result = userValidation.ValidateLastName("Shah");
+		Assert.assertTrue( result );
+	}
+
+	@Test
+	public void given_LastName_withMixedAlphabets_return_false()
+	{
+		boolean result = userValidation.ValidateLastName("DAves");
+		Assert.assertFalse( result );
+	}
+
+	@Test
+	public void given_LastName_Alphanumeric_return_false()
+	{
+		boolean result = userValidation.ValidateLastName("Mar6sh");
+		Assert.assertEquals( result, false );
+	}
 
 	
 }
