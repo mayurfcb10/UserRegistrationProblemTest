@@ -14,7 +14,7 @@ public class EmailValidationTest {
 
 	private String emailValidate;
 	private boolean expectedResult;
-	private EmailValidation emailValidation;
+	private UserValidation userValidation;
 
 	public EmailValidationTest(String emailValidate, boolean expectedResult) {
 		super();
@@ -24,7 +24,7 @@ public class EmailValidationTest {
 
 	@Before
 	public void initialize() {
-		emailValidation = new EmailValidation();
+		userValidation = new UserValidation();
 	}
 
 	@Parameterized.Parameters
@@ -54,8 +54,14 @@ public class EmailValidationTest {
 	
 	@Test
 	public void TestEmailValiation() {
-		System.out.println(emailValidate + " "+expectedResult);
-		Assert.assertEquals(expectedResult, emailValidation.EmailValidate(emailValidate, expectedResult));
+		boolean result;
+		try {
+			result = userValidation.ValidateEmail(".abc@gmail.com");
+		} catch (UserValidationException e) {
+			System.out.println(e.type + " will give message  "+ e.getMessage());
+			Assert.assertEquals(UserValidationException.ExceptionType.INVALID_EMAIL, e.type );
+		}
+		
 		
 	}
 
