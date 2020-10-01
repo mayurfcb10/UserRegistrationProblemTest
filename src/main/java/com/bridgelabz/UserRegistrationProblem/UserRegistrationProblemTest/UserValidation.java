@@ -2,6 +2,10 @@ package com.bridgelabz.UserRegistrationProblem.UserRegistrationProblemTest;
 
 public class UserValidation {
 
+	public void PrintWelcomeMessage() {
+		System.out.println("Welcome to the User Validation Problem");
+	}
+
 	public void IsEmptyorNullString(String input) throws UserValidationException {
 		try {
 			if (input.length() == 0) {
@@ -14,12 +18,6 @@ public class UserValidation {
 
 		}
 	}
-
-
-	public void PrintWelcomeMessage() {
-		System.out.println("Welcome to the User Validation Problem");
-	}
-
 
 	public boolean ValidateFirstName(String firstName) throws UserValidationException {
 		IsEmptyorNullString(firstName);
@@ -71,7 +69,6 @@ public class UserValidation {
 			throw new UserValidationException(UserValidationException.ExceptionType.INVALID_PHONE_NUMBER,"Given Invalid PhoneNumber");
 		}
 	}
-
 
 	public boolean ValidatePassword(String password) throws UserValidationException {
 		IsEmptyorNullString(password);

@@ -17,7 +17,6 @@ public class UserValidationTest
 		userValidation.PrintWelcomeMessage();
 	}
 
-
 	@Test
 	public void given_FirstName_NULL_return_Null_Not_Allowed_Try_Again()throws UserValidationException { 
 		boolean result;
@@ -47,7 +46,7 @@ public class UserValidationTest
 			result = userValidation.ValidateFirstName("Mar6sh");
 		} catch (UserValidationException e) {
 			System.out.println(e.type+" will give message  "+ e.getMessage());
-			Assert.assertEquals(UserValidationException.INVALID_FIRST_NAME , e.type );
+			Assert.assertEquals(UserValidationException.ExceptionType.INVALID_FIRST_NAME , e.type );
 		}
 		
 	}
@@ -58,7 +57,7 @@ public class UserValidationTest
 		try {
 			result = userValidation.ValidateLastName("Shah");
 		} catch (UserValidationException e) {
-			Assert.assertEquals(UserValidationException.INVALID_LAST_NAME , e.type );
+			Assert.assertEquals(UserValidationException.ExceptionType.INVALID_LAST_NAME , e.type );
 		}
 	}
 	
