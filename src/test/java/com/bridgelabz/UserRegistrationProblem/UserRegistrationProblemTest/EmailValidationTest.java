@@ -2,7 +2,6 @@ package com.bridgelabz.UserRegistrationProblem.UserRegistrationProblemTest;
 
 import java.util.Arrays;
 import java.util.Collection;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,9 +15,10 @@ public class EmailValidationTest {
 	private boolean expectedResult;
 	private UserValidation userValidation;
 
-	public EmailValidationTest(String emailValidate) {
+	public EmailValidationTest(String emailValidate, boolean expectedResult) {
 		super();
 		this.emailValidate = emailValidate;
+		this.expectedResult = expectedResult;
 	}
 
 	@Before
@@ -28,33 +28,35 @@ public class EmailValidationTest {
 
 	@Parameterized.Parameters
 	public static Collection input() {
-		return Arrays.asList(new Object[][] {{ "abc@.com" },
-			 								 { "abc@123gmail.a" },
-			 								 { "abc123@.com" },
-			 								 { "abc123@.com.com" },
-			 								 { ".abc@abc.com" },
-			 								 { "abc()*@gmail.com" },
-			 								 { "abc@%*.com.com" },
-			 								 { "abc..2002@.gmail.com" },
-			 								 { "abc.@gmail.com"},
-			 								 { "abc@abc@gmail.com"},
-			 								 { "abc@gmail.com.1a"},
-			 								 { "abc@gmail.com.aa.au"}});
-	}
-	
-	@Test
-	public void TestEmailValiation() {
-		boolean result;
-		try {
-			result = userValidation.ValidateEmail(this.emailValidate);
-		} catch (UserValidationException e) {
-			System.out.println(e.type + " will give message  "+ e.getMessage());
-			Assert.assertEquals(UserValidationException.ExceptionType.INVALID_EMAIL, e.type );
-		}
-		
-		
+		return Arrays.asList(new Object[][] {{ "abc@yahoo.com", true },
+												{ "abc-100@yahoo.com", true },
+												{ "abc.100@yahoo.com", true },
+												{ "abc-100@abc.net", true },
+												{ "abc.100@abc.com.au", true },
+												{ "abc@1.com", true },
+												{ "abc@gmail.com.com", true },
+												{ "abc+100@gmail.com", true },
+												{ "abc@.com", false },
+												{ "abc@123gmail.a", false },
+												{ "abc123@.com", false },
+												{ "abc123@.com.com", false },
+												{ ".abc@abc.com", false },
+												{ "abc()*@gmail.com", false },
+												{ "abc@%*.com.com", false },
+												{ "abc..2002@.gmail.com", false },
+												{ "abc.@gmail.com", false },
+												{ "abc@abc@gmail.com", false },
+												{ "abc@gmail.com.1a", false },
+												{ "abc@gmail.com.aa.au", false }});
 	}
 
+
+	@Test
+	public void TestEmailValiation()throws UserValidationException  {
+		boolean result;
+		result = userValidation.ValidateEmail(this.emailValidate);
+		Assert.assertEquals(this.expectedResult,result);
+	}
 
 
 }

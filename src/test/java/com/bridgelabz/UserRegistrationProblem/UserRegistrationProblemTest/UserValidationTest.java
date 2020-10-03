@@ -42,25 +42,17 @@ public class UserValidationTest
 	@Test
 	public void given_FirstName_Alphanumeric_return_false() throws UserValidationException {
 		boolean result;
-		try {
 			result = userValidation.ValidateFirstName("Mar6sh");
-		} catch (UserValidationException e) {
-			System.out.println(e.type+" will give message  "+ e.getMessage());
-			Assert.assertEquals(UserValidationException.ExceptionType.INVALID_FIRST_NAME , e.type );
-		}
-		
+			Assert.assertEquals( false, result );
 	}
 
 	@Test
 	public void given_LastName_CapitalLetter_return_true() throws UserValidationException {
-		boolean result;
-		try {
+		boolean result = false;
 			result = userValidation.ValidateLastName("Shah");
-		} catch (UserValidationException e) {
-			Assert.assertEquals(UserValidationException.ExceptionType.INVALID_LAST_NAME , e.type );
-		}
+			Assert.assertEquals(true, result );
 	}
-	
+
 	@Test
 	public void given_Email_when_given_Empty_return_EmptyInputNotAllowed() throws UserValidationException{
 		boolean result;
@@ -71,7 +63,7 @@ public class UserValidationTest
 			Assert.assertEquals(UserValidationException.ExceptionType.GIVEN_EMPTY , e.type );
 		}
 	}
-	
+
 	@Test
 	public void given_Email_when_given_Null_return_NullNotAllowed() throws UserValidationException{
 		boolean result;
@@ -82,19 +74,13 @@ public class UserValidationTest
 			Assert.assertEquals(UserValidationException.ExceptionType.GIVEN_NULL , e.type );
 		}
 	}
-	
+
 	@Test
 	public void given_Email_when_emailStartswithDot_return_InvalidEmail() throws UserValidationException {
-		boolean result;
-		try {
-			result = userValidation.ValidateEmail(".abc@gmail.com");
-		} catch (UserValidationException e) {
-			System.out.println(e.type+" will give message  "+ e.getMessage());
-			Assert.assertEquals(UserValidationException.ExceptionType.INVALID_EMAIL, e.type );
-		}
-		
+		boolean result = userValidation.ValidateEmail(".abc@gmail.com");
+		Assert.assertEquals( false, result);
 	}
-	
+
 	@Test
 	public void given_PhoneNumber_with_NullValue_return_NullNotAllowed() throws UserValidationException
 	{
@@ -118,20 +104,15 @@ public class UserValidationTest
 			Assert.assertEquals(UserValidationException.ExceptionType.GIVEN_EMPTY, e.type );
 		}
 	}
-	
+
 	@Test
 	public void given_PhoneNumber_with_Invalid_countryCode_return_INVALID() throws UserValidationException
 	{
-		boolean result ;
-		try {
-			result = userValidation.ValidatePhoneNumber("789 4928472842");
-		} catch (UserValidationException e) {
-			System.out.println(e.type+" will give message  "+ e.getMessage());
-			Assert.assertEquals(UserValidationException.ExceptionType.INVALID_PHONE_NUMBER, e.type );
-		}
-	
+		boolean result = userValidation.ValidatePhoneNumber("789 4928472842");
+		Assert.assertEquals(false, result );
+
 	}
-	
+
 	@Test
 	public void given_Strong_Password_when_given_NULL_return_NullNotAllowed() throws UserValidationException
 	{
@@ -142,9 +123,9 @@ public class UserValidationTest
 			System.out.println(e.type+" will give message  "+ e.getMessage());
 			Assert.assertEquals(UserValidationException.ExceptionType.GIVEN_NULL, e.type );
 		}
-	
+
 	}
-	
+
 	@Test
 	public void given_Strong_Password_when_given_Empty_return_EmptyInputNotAllowed() throws UserValidationException
 	{
@@ -155,20 +136,115 @@ public class UserValidationTest
 			System.out.println(e.type+" will give message  "+ e.getMessage());
 			Assert.assertEquals(UserValidationException.ExceptionType.GIVEN_EMPTY, e.type );
 		}
-	
-		
+
+
 	}
-	
+
 	@Test
 	public void given_Strong_Password_when_given_Wrongpassword_return_InvalidPassword() throws UserValidationException
 	{
 		boolean result ;
-		try {
 			result = userValidation.ValidatePassword("cmdjbhsur8766&");
-		} catch (UserValidationException e) {
-			System.out.println(e.type+" will give message  "+ e.getMessage());
-			Assert.assertEquals(UserValidationException.ExceptionType.INVALID_PASSWORD, e.type );
-		}
+			Assert.assertEquals( false, result );
 	}
 
+	
+	@Test
+	public void given_FirstName_CapitalLetter_return_true() throws UserValidationException
+	{
+		boolean result = userValidation.ValidateFirstName("Marsh");
+		Assert.assertEquals( true,result );
+	}
+
+	@Test
+	public void given_FirstName_withMixedAlphabets_return_false() throws UserValidationException
+	{
+		boolean result = userValidation.ValidateFirstName("maRsh");
+		Assert.assertEquals( false, result );
+	}
+
+	
+	@Test
+	public void given_LastName_withMixedAlphabets_return_false() throws UserValidationException
+	{
+		boolean result = userValidation.ValidateLastName("DAves");
+		Assert.assertEquals(false,result );
+	}
+
+	
+	@Test
+	public void given_Email_when_given_CountryDomain_return_true() throws UserValidationException
+	{
+		boolean result = userValidation.ValidateEmail("abc@abc.com.au");
+		Assert.assertTrue( result );
+	}
+
+	@Test
+	public void given_Email_when_emailStartswithDot_return_false() throws UserValidationException
+	{
+		boolean result = userValidation.ValidateEmail(".abc@gmail.com");
+		Assert.assertFalse( result );
+	}
+
+	@Test
+	public void given_Email_containsOptional_Special_Character_return_true() throws UserValidationException
+	{
+		boolean result = userValidation.ValidateEmail("abc@%*.com.com");
+		Assert.assertEquals( false, result );
+	}
+	
+	@Test
+	public void given_PhoneNumber_with_valid_countryCode_return_true() throws UserValidationException
+	{
+		boolean result = userValidation.ValidatePhoneNumber("91 7972245761");
+		Assert.assertTrue( result );
+	}
+
+	@Test
+	public void given_PhoneNumber_with_No_countryCode_return_false() throws UserValidationException
+	{
+		boolean result = userValidation.ValidatePhoneNumber("7596859453");
+		Assert.assertFalse( result );
+	}
+	@Test
+	public void given_PhoneNumber_with_Invalid_countryCode_return_false() throws UserValidationException
+	{
+		boolean result = userValidation.ValidatePhoneNumber("091 7596859453");
+		Assert.assertFalse( result );
+	}
+	
+	@Test
+	public void given_Strong_Password_when_given_correct_return_true() throws UserValidationException
+	{
+		boolean result = userValidation.ValidatePassword("zcsfkasHds98&");
+		Assert.assertTrue( result);
+	}
+
+	@Test
+	public void given_Strong_Password_when_given_incorrect_return_false() throws UserValidationException
+	{
+		boolean result = userValidation.ValidatePassword("zcsfkasds98&");
+		Assert.assertFalse( result);
+	}
+
+	@Test
+	public void given_Strong_Password_when_given_more_than_one_Specialcharacter_return_false() throws UserValidationException
+	{
+		boolean result = userValidation.ValidatePassword("zcsfkasds9&5%8&");
+		Assert.assertEquals( result, false);
+	}
+	
+	@Test
+	public void given_Strong_Password_when_given_No_UpperCharacter_return_false() throws UserValidationException
+	{
+		boolean result = userValidation.ValidatePassword("zcsfkasds9&5");
+		Assert.assertEquals( result, false);
+	}
+	
+	@Test
+	public void given_Strong_Password_when_given_No_Digit_return_false() throws UserValidationException
+	{
+		boolean result = userValidation.ValidatePassword("zCsfkasds&");
+		Assert.assertEquals( result, false);
+	}
 }
