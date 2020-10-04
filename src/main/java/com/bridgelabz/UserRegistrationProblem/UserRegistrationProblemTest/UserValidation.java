@@ -1,5 +1,11 @@
 package com.bridgelabz.UserRegistrationProblem.UserRegistrationProblemTest;
 
+
+@FunctionalInterface
+interface checkIfValidate {
+    public boolean checkIfValidate(String input)throws UserValidationException;
+}
+
 public class UserValidation {
 
 	public void PrintWelcomeMessage() {
@@ -19,16 +25,16 @@ public class UserValidation {
 		}
 	}
 
-	public boolean ValidateFirstName(String firstName) throws UserValidationException {
+	checkIfValidate validateFirstName = (String firstName)-> {
 		IsEmptyorNullString(firstName);
 		boolean  matcher = firstName.matches("([A-Z][a-z]{2,})");
 		if(matcher == true) {
 			return matcher;
 		} 
 		return matcher;
-	}
+	};
 
-	public boolean ValidateLastName(String lastName) throws UserValidationException {
+	checkIfValidate validateLastName = (String lastName) -> {
 		IsEmptyorNullString(lastName);
 		boolean matcher = lastName.matches("([A-Z][a-z]{2,})");
 		if(matcher == true) {
@@ -36,9 +42,9 @@ public class UserValidation {
 		}
 		return matcher;
 
-	}
+	};
 
-	public boolean ValidateEmail(String email) throws UserValidationException {
+	checkIfValidate validateEmail = (String email) -> {
 		IsEmptyorNullString(email);
 		boolean matcher = email.matches( "^[a-zA-Z]+([._+-]{0,1}[a-zA-Z0-9]+)*@[a-zA-Z0-9]+.[a-zA-Z]{2,4}+(?:\\.[a-z]{2,}){0,1}$");
 		if(matcher == true) {
@@ -46,9 +52,9 @@ public class UserValidation {
 		}
 		else 
 			return matcher;
-	}
+	};
 
-	public boolean ValidatePhoneNumber(String phoneNumber) throws UserValidationException {
+	checkIfValidate validatePhoneNumber = (String phoneNumber) -> {
 		IsEmptyorNullString(phoneNumber);
 		boolean matcher = phoneNumber.matches("(([0-9]{2})?)[ ][0-9]{10}");
 		if(matcher) {
@@ -57,9 +63,9 @@ public class UserValidation {
 		}
 		return false;
 		
-	}
+	};
 
-	public boolean ValidatePassword(String password) throws UserValidationException {
+	checkIfValidate validatePassword = (String password) -> {
 		IsEmptyorNullString(password);
 		boolean matcher = password.matches("(^(?=.*[A-Z]))(?=.*[0-9])(?=.*[a-z])(?=.*[@*&^%#-*+!]{1}).{8,}$");
 
@@ -69,5 +75,5 @@ public class UserValidation {
 		}
 		return false;
 
-	}
+	};
 }

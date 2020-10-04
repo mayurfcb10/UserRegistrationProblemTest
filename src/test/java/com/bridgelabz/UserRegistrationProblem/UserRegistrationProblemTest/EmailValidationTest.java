@@ -54,7 +54,7 @@ public class EmailValidationTest {
 	@Test
 	public void TestEmailValiation()throws UserValidationException  {
 		boolean result;
-		result = userValidation.ValidateEmail(this.emailValidate);
+		result = userValidation.validateEmail.checkIfValidate(this.emailValidate);
 		Assert.assertEquals(this.expectedResult,result);
 	}
 
